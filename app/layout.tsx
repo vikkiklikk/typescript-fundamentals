@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/theme-toggler";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +22,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <div className="min-h-screen text-foreground relative">
@@ -31,6 +32,7 @@ export default function RootLayout({
             </div>
             {children}
           </div>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
