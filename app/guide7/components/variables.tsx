@@ -52,7 +52,7 @@ let dynamicValue: any = "This can be anything";
     toast({
       title: `Variable: ${name}`,
       description: `Value: ${JSON.stringify(value)}`,
-      duration: 3000,
+      duration: 8000,
     });
   };
 

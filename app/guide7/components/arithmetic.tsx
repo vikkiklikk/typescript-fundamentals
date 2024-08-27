@@ -31,6 +31,7 @@ let modulus: number = a % b;
     toast({
       title: "Arithmetic Operation Result",
       description: `${operation}: ${result}`,
+      duration: 8000,
     });
   };
 
