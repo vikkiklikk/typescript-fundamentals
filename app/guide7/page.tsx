@@ -2,7 +2,6 @@
 "use strict";
 
 import React from "react";
-import { CodeBlock, dracula } from "react-code-blocks";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,7 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import {
   Accordion,
   AccordionContent,
