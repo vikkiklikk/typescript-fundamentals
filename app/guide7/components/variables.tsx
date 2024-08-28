@@ -4,6 +4,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Separator } from "@/components/ui/separator";
+import { CustomToast } from "@/components/ui/custom-toast";
+import { TerminalOutput } from "@/components/ui/terminal";
 
 const Variables = () => {
   const { toast } = useToast();
@@ -50,9 +52,14 @@ let dynamicValue: any = "This can be anything";
     event.preventDefault();
     event.stopPropagation();
     toast({
-      title: `Variable: ${name}`,
-      description: `Value: ${JSON.stringify(value)}`,
-      duration: 8000,
+      description: (
+        <TerminalOutput
+          command={`console.log(${name})`}
+          output={JSON.stringify(value, null, 2)}
+        />
+      ),
+      duration: 5000,
+      className: "bg-gray-900 border-gray-800 text-white",
     });
   };
 

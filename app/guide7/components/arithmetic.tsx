@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { CodeBlock, atomOneDark } from "react-code-blocks";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Separator } from "@/components/ui/separator";
+import { CustomToast } from "@/components/ui/custom-toast";
+import { TerminalOutput } from "@/components/ui/terminal";
 
-const Arithmetic = () => {
+const ArithmeticOperations = () => {
   const { toast } = useToast();
-  const a = 10;
-  const b = 5;
+  const [showPing, setShowPing] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowPing(false);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const code = `
 let a: number = 10;
@@ -21,22 +30,59 @@ let division: number = a / b;
 let modulus: number = a % b;
   `.trim();
 
+  const operations = [
+    {
+      name: "Addition",
+      symbol: "+",
+      operation: (a: number, b: number) => a + b,
+    },
+    {
+      name: "Subtraction",
+      symbol: "-",
+      operation: (a: number, b: number) => a - b,
+    },
+    {
+      name: "Multiplication",
+      symbol: "*",
+      operation: (a: number, b: number) => a * b,
+    },
+    {
+      name: "Division",
+      symbol: "/",
+      operation: (a: number, b: number) => a / b,
+    },
+    {
+      name: "Modulus",
+      symbol: "%",
+      operation: (a: number, b: number) => a % b,
+    },
+  ];
+
   const performOperation = (
-    operation: string,
-    result: number,
+    name: string,
+    symbol: string,
+    operation: (a: number, b: number) => number,
     event: React.MouseEvent
   ) => {
     event.preventDefault();
     event.stopPropagation();
+    const a = 10;
+    const b = 5;
+    const result = operation(a, b);
     toast({
-      title: "Arithmetic Operation Result",
-      description: `${operation}: ${result}`,
-      duration: 8000,
+      description: (
+        <TerminalOutput
+          command={`console.log(${a} ${symbol} ${b})`}
+          output={result.toString()}
+        />
+      ),
+      duration: 5000,
+      className: "bg-gray-900 border-gray-800 text-white",
     });
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-4">
       <p>Here are some examples of arithmetic operations in TypeScript:</p>
       <CodeBlock
         text={code}
@@ -50,36 +96,22 @@ let modulus: number = a % b;
         }}
       />
       <div className="flex flex-wrap gap-2 justify-center">
-        <Button
-          onClick={(e) => performOperation("Addition", a + b, e)}
-          size="sm"
-        >
-          Addition
-        </Button>
-        <Button
-          onClick={(e) => performOperation("Subtraction", a - b, e)}
-          size="sm"
-        >
-          Subtraction
-        </Button>
-        <Button
-          onClick={(e) => performOperation("Multiplication", a * b, e)}
-          size="sm"
-        >
-          Multiplication
-        </Button>
-        <Button
-          onClick={(e) => performOperation("Division", a / b, e)}
-          size="sm"
-        >
-          Division
-        </Button>
-        <Button
-          onClick={(e) => performOperation("Modulus", a % b, e)}
-          size="sm"
-        >
-          Modulus
-        </Button>
+        {operations.map(({ name, symbol, operation }, index) => (
+          <div key={name} className="relative">
+            <Button
+              size="sm"
+              onClick={(e) => performOperation(name, symbol, operation, e)}
+            >
+              Show {name}
+            </Button>
+            {index === 0 && showPing && (
+              <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-background dark:bg-foreground opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-gray-500 dark:bg-foreground"></span>
+              </span>
+            )}
+          </div>
+        ))}
       </div>
       <Separator />
       <div className="flex justify-between space-x-4">
@@ -107,4 +139,4 @@ let modulus: number = a % b;
   );
 };
 
-export default Arithmetic;
+export default ArithmeticOperations;
