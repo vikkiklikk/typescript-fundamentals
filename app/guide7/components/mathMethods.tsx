@@ -4,10 +4,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Separator } from "@/components/ui/separator";
-import { CustomToast } from "@/components/ui/custom-toast";
 import { TerminalOutput } from "@/components/ui/terminal";
 
-const Variables = () => {
+const MathMethods = () => {
   const { toast } = useToast();
   const [showPing, setShowPing] = useState(true);
   const [showChatBubble, setShowChatBubble] = useState(false);
@@ -19,7 +18,7 @@ const Variables = () => {
 
     const chatBubbleTimer = setTimeout(() => {
       setShowChatBubble(true);
-    }, 500); // Delay of 1 second before showing the chat bubble
+    }, 500); // Delay of 0.5 seconds before showing the chat bubble
 
     return () => {
       clearTimeout(pingTimer);
@@ -28,52 +27,58 @@ const Variables = () => {
   }, []);
 
   const code = `
-// Number
-let age: number = 35;
+// Math.round(): Rounds a number to the nearest integer
+console.log(Math.round(4.7));    // Output: 5
+console.log(Math.round(4.4));    // Output: 4
 
-// String
-let name: string = "Viktor Birgisson";
+// Math.pow(): Returns the base to the exponent power
+console.log(Math.pow(2, 3));     // Output: 8
 
-// Boolean
-let isStudent: boolean = true;
+// Math.sqrt(): Returns the square root of a number
+console.log(Math.sqrt(16));      // Output: 4
 
-// Array
-let hobbies: string[] = ["football", "coding", "dota2"];
+// Math.random(): Returns a random number between 0 and 1
+console.log(Math.random());      // Output: Random number between 0 and 1
 
-// Object
-let person: { name: string, age: number } = { name: "Vikki Klikk", age: 35 };
+// Math.max(): Returns the largest of zero or more numbers
+console.log(Math.max(5, 10, 15));// Output: 15
 
-// Any
-let dynamicValue: any = "This can be anything";
+// Math.min(): Returns the smallest of zero or more numbers
+console.log(Math.min(5, 10, 15));// Output: 5
   `.trim();
 
-  const variables = {
-    age: 35,
-    name: "Viktor Birgisson",
-    isStudent: true,
-    hobbies: ["football", "coding", "dota2"],
-    person: { name: "Vikki Klikk", age: 35 },
-    dynamicValue: "This can be anything",
-  };
+  const mathOperations = [
+    { name: "Round", operation: () => Math.round(4.7) },
+    { name: "Power", operation: () => Math.pow(2, 3) },
+    { name: "Square Root", operation: () => Math.sqrt(16) },
+    { name: "Random", operation: () => Math.random() },
+    { name: "Max", operation: () => Math.max(5, 10, 15) },
+    { name: "Min", operation: () => Math.min(5, 10, 15) },
+  ];
 
-  const showVariable = (name: string, value: any, event: React.MouseEvent) => {
+  const showResult = (
+    name: string,
+    operation: () => number,
+    event: React.MouseEvent
+  ) => {
     event.preventDefault();
     event.stopPropagation();
+    const result = operation();
     toast({
       description: (
         <TerminalOutput
-          command={`console.log(${name})`}
-          output={JSON.stringify(value, null, 2)}
+          command={`console.log(Math.${name.toLowerCase()}(...))`}
+          output={result.toString()}
         />
       ),
       duration: 5000,
-      className: "dark:bg-gray-900 dark:border-gray-800 text-white",
+      className: "bg-gray-900 border-gray-800 text-white",
     });
   };
 
   return (
     <div className="flex flex-col gap-4">
-      <p>Here&#39;s an example of variable assignments in TypeScript:</p>
+      <p>Here are some examples of Math methods in TypeScript:</p>
       <CodeBlock
         text={code}
         language="typescript"
@@ -86,10 +91,10 @@ let dynamicValue: any = "This can be anything";
         }}
       />
       <div className="flex flex-wrap gap-2 justify-center">
-        {Object.entries(variables).map(([name, value], index) => (
+        {mathOperations.map(({ name, operation }, index) => (
           <div key={name} className="relative">
-            <Button size="sm" onClick={(e) => showVariable(name, value, e)}>
-              Show {name}
+            <Button size="sm" onClick={(e) => showResult(name, operation, e)}>
+              {name}
             </Button>
             {index === 0 && showPing && (
               <span className="absolute -top-1 -right-1 flex h-3 w-3">
@@ -115,13 +120,15 @@ let dynamicValue: any = "This can be anything";
             <div className="absolute left-1 top-0.6 -ml-2 w-3 h-4 bg-blue-100 dark:bg-blue-900 rotate-45 transform origin-center"></div>
             <h4 className="text-sm font-semibold mb-2">@vikkiklikk</h4>
             <p className="text-sm">
-              The difference here between normal JavaScript and TypeScript is
-              that we declare the type of our variables. In TypeScript, we
-              explicitly specify the data type of each variable, which provides
-              several benefits: By declaring types, TypeScript can catch
-              type-related errors at compile-time, before the code runs. Type
-              annotations serve as built-in documentation, making it easier for
-              developers to understand what kind of data a variable should hold.
+              TypeScript inherits all the Math methods from JavaScript,
+              providing type safety and better intellisense. The Math object
+              offers a wide range of mathematical operations, from basic
+              arithmetic to more complex calculations. These methods are
+              particularly useful for numerical computations, random number
+              generation, and mathematical transformations in your TypeScript
+              applications. Remember that all Math functions return a number
+              type in TypeScript, which helps in maintaining type consistency
+              throughout your code.
             </p>
           </div>
         </div>
@@ -130,4 +137,4 @@ let dynamicValue: any = "This can be anything";
   );
 };
 
-export default Variables;
+export default MathMethods;

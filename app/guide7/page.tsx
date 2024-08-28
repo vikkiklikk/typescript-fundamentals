@@ -23,6 +23,12 @@ import Link from "next/link";
 import Variables from "./components/variables";
 import Arithmetic from "./components/arithmetic";
 import AccordionInstructionToast from "./components/accordionInstruction";
+import StringConcatenations from "./components/stringConCat";
+import TruthyFalsy from "./components/truthsyFalsy";
+import ArrayOperations from "./components/arrayOperations";
+import ObjectOperations from "./components/objectOperations";
+import MathMethods from "./components/mathMethods";
+import DateOperations from "./components/dateOperations";
 
 const page = () => {
   return (
@@ -40,7 +46,7 @@ const page = () => {
           </CardHeader>
           <CardContent>
             <form>
-              <Accordion type="multiple" className="w-full">
+              <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="item-1">
                   <AccordionTrigger>
                     Demonstrate variables assignments
@@ -62,7 +68,7 @@ const page = () => {
                     Output the result of string concatenations
                   </AccordionTrigger>
                   <AccordionContent>
-                    String concatenations output component goes here.
+                    <StringConcatenations />
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-4">
@@ -71,8 +77,7 @@ const page = () => {
                     or falsy values
                   </AccordionTrigger>
                   <AccordionContent>
-                    Usage of if statements to check for truthy or falsy values
-                    component goes here.
+                    <TruthyFalsy />
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-5">
@@ -80,7 +85,7 @@ const page = () => {
                     Create array with multiple values
                   </AccordionTrigger>
                   <AccordionContent>
-                    Array demonstration component goes here.
+                    <ArrayOperations />
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-6">
@@ -88,7 +93,7 @@ const page = () => {
                     Demonstrate how to create an object
                   </AccordionTrigger>
                   <AccordionContent>
-                    Object demonstration component goes here.
+                    <ObjectOperations />
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-7">
@@ -96,7 +101,7 @@ const page = () => {
                     Demonstrate at least one Math() method
                   </AccordionTrigger>
                   <AccordionContent>
-                    Demonstration of Math() method component goes here.
+                    <MathMethods />
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-8">
@@ -104,8 +109,7 @@ const page = () => {
                     Output the date and time of opening of the file using Date()
                   </AccordionTrigger>
                   <AccordionContent>
-                    Demonstration of new Date() on opening the component goes
-                    here.
+                    <DateOperations />
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>

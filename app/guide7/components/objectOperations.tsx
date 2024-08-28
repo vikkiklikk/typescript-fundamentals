@@ -4,10 +4,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Separator } from "@/components/ui/separator";
-import { CustomToast } from "@/components/ui/custom-toast";
 import { TerminalOutput } from "@/components/ui/terminal";
 
-const Variables = () => {
+const ObjectOperations = () => {
   const { toast } = useToast();
   const [showPing, setShowPing] = useState(true);
   const [showChatBubble, setShowChatBubble] = useState(false);
@@ -19,7 +18,7 @@ const Variables = () => {
 
     const chatBubbleTimer = setTimeout(() => {
       setShowChatBubble(true);
-    }, 500); // Delay of 1 second before showing the chat bubble
+    }, 500); // Delay of 0.5 seconds before showing the chat bubble
 
     return () => {
       clearTimeout(pingTimer);
@@ -28,52 +27,85 @@ const Variables = () => {
   }, []);
 
   const code = `
-// Number
-let age: number = 35;
+// Create an object
+let person: { name: string; age: number } = {
+  name: "Viktor",
+  age: 35
+};
 
-// String
-let name: string = "Viktor Birgisson";
+// Add a property
+person['job'] = "Developer";
 
-// Boolean
-let isStudent: boolean = true;
+// Remove a property
+delete person.age;
 
-// Array
-let hobbies: string[] = ["football", "coding", "dota2"];
+// Output a specific property
+console.log(person.name);
 
-// Object
-let person: { name: string, age: number } = { name: "Vikki Klikk", age: 35 };
-
-// Any
-let dynamicValue: any = "This can be anything";
+// Output the entire object
+console.log(person);
   `.trim();
 
-  const variables = {
+  const [person, setPerson] = useState<{ [key: string]: any }>({
+    name: "Viktor",
     age: 35,
-    name: "Viktor Birgisson",
-    isStudent: true,
-    hobbies: ["football", "coding", "dota2"],
-    person: { name: "Vikki Klikk", age: 35 },
-    dynamicValue: "This can be anything",
-  };
+  });
 
-  const showVariable = (name: string, value: any, event: React.MouseEvent) => {
+  const operations = [
+    { name: "Show Full Object", operation: () => person },
+    { name: "Show Name", operation: () => person.name },
+    {
+      name: "Add Job",
+      operation: () => {
+        setPerson((prev) => ({ ...prev, job: "Developer" }));
+        return "Property 'job' added";
+      },
+    },
+    {
+      name: "Remove Age",
+      operation: () => {
+        setPerson((prev) => {
+          const { age, ...rest } = prev;
+          return rest;
+        });
+        return "Property 'age' removed";
+      },
+    },
+    {
+      name: "Reset Object",
+      operation: () => {
+        setPerson({ name: "Viktor", age: 35 });
+        return "Object reset to initial state";
+      },
+    },
+  ];
+
+  const showResult = (
+    name: string,
+    operation: () => any,
+    event: React.MouseEvent
+  ) => {
     event.preventDefault();
     event.stopPropagation();
+    const result = operation();
     toast({
       description: (
         <TerminalOutput
           command={`console.log(${name})`}
-          output={JSON.stringify(value, null, 2)}
+          output={JSON.stringify(result, null, 2)}
         />
       ),
       duration: 5000,
-      className: "dark:bg-gray-900 dark:border-gray-800 text-white",
+      className: "bg-gray-900 border-gray-800 text-white",
     });
   };
 
   return (
     <div className="flex flex-col gap-4">
-      <p>Here&#39;s an example of variable assignments in TypeScript:</p>
+      <p>
+        Here&#39;s an example of creating and manipulating objects in
+        TypeScript:
+      </p>
       <CodeBlock
         text={code}
         language="typescript"
@@ -86,10 +118,10 @@ let dynamicValue: any = "This can be anything";
         }}
       />
       <div className="flex flex-wrap gap-2 justify-center">
-        {Object.entries(variables).map(([name, value], index) => (
+        {operations.map(({ name, operation }, index) => (
           <div key={name} className="relative">
-            <Button size="sm" onClick={(e) => showVariable(name, value, e)}>
-              Show {name}
+            <Button size="sm" onClick={(e) => showResult(name, operation, e)}>
+              {name}
             </Button>
             {index === 0 && showPing && (
               <span className="absolute -top-1 -right-1 flex h-3 w-3">
@@ -115,13 +147,14 @@ let dynamicValue: any = "This can be anything";
             <div className="absolute left-1 top-0.6 -ml-2 w-3 h-4 bg-blue-100 dark:bg-blue-900 rotate-45 transform origin-center"></div>
             <h4 className="text-sm font-semibold mb-2">@vikkiklikk</h4>
             <p className="text-sm">
-              The difference here between normal JavaScript and TypeScript is
-              that we declare the type of our variables. In TypeScript, we
-              explicitly specify the data type of each variable, which provides
-              several benefits: By declaring types, TypeScript can catch
-              type-related errors at compile-time, before the code runs. Type
-              annotations serve as built-in documentation, making it easier for
-              developers to understand what kind of data a variable should hold.
+              TypeScript enhances object handling by allowing you to define
+              object shapes with interfaces or type aliases. This provides type
+              checking and autocompletion when working with objects. While you
+              can still add or remove properties dynamically, TypeScript
+              encourages you to declare the structure of your objects upfront,
+              leading to more predictable and maintainable code. The compiler
+              can catch errors like typos in property names or accessing
+              non-existent properties at compile-time.
             </p>
           </div>
         </div>
@@ -130,4 +163,4 @@ let dynamicValue: any = "This can be anything";
   );
 };
 
-export default Variables;
+export default ObjectOperations;

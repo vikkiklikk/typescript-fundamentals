@@ -4,10 +4,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Separator } from "@/components/ui/separator";
-import { CustomToast } from "@/components/ui/custom-toast";
 import { TerminalOutput } from "@/components/ui/terminal";
 
-const Variables = () => {
+const StringConcatenations = () => {
   const { toast } = useToast();
   const [showPing, setShowPing] = useState(true);
   const [showChatBubble, setShowChatBubble] = useState(false);
@@ -19,7 +18,7 @@ const Variables = () => {
 
     const chatBubbleTimer = setTimeout(() => {
       setShowChatBubble(true);
-    }, 500); // Delay of 1 second before showing the chat bubble
+    }, 500); // Delay of 0.5 second before showing the chat bubble
 
     return () => {
       clearTimeout(pingTimer);
@@ -28,52 +27,53 @@ const Variables = () => {
   }, []);
 
   const code = `
-// Number
+let firstName: string = "Vikki";
+let lastName: string = "Klikk";
+
+// Using the + operator
+let fullName: string = firstName + " " + lastName;
+
+// Using template literals
+let greeting: string = \`Hello, \${firstName} \${lastName}!\`;
+
+// Concatenating with numbers
 let age: number = 35;
-
-// String
-let name: string = "Viktor Birgisson";
-
-// Boolean
-let isStudent: boolean = true;
-
-// Array
-let hobbies: string[] = ["football", "coding", "dota2"];
-
-// Object
-let person: { name: string, age: number } = { name: "Vikki Klikk", age: 35 };
-
-// Any
-let dynamicValue: any = "This can be anything";
+let introduction: string = \`\${fullName} is \${age} years old.\`;
   `.trim();
 
-  const variables = {
-    age: 35,
-    name: "Viktor Birgisson",
-    isStudent: true,
-    hobbies: ["football", "coding", "dota2"],
-    person: { name: "Vikki Klikk", age: 35 },
-    dynamicValue: "This can be anything",
-  };
+  let firstName: string = "Vikki";
+  let lastName: string = "Klikk";
+  let fullName: string = firstName + " " + lastName;
+  let greeting: string = `Hello, ${firstName} ${lastName}!`;
+  let age: number = 35;
+  let introduction: string = `${fullName} is ${age} years old.`;
 
-  const showVariable = (name: string, value: any, event: React.MouseEvent) => {
+  const concatenations = [
+    { name: "fullName", operation: () => fullName },
+    { name: "greeting", operation: () => greeting },
+    { name: "introduction", operation: () => introduction },
+  ];
+
+  const showConcatenation = (
+    name: string,
+    operation: () => string,
+    event: React.MouseEvent
+  ) => {
     event.preventDefault();
     event.stopPropagation();
+    const result = operation();
     toast({
       description: (
-        <TerminalOutput
-          command={`console.log(${name})`}
-          output={JSON.stringify(value, null, 2)}
-        />
+        <TerminalOutput command={`console.log(${name})`} output={result} />
       ),
       duration: 5000,
-      className: "dark:bg-gray-900 dark:border-gray-800 text-white",
+      className: "bg-gray-900 border-gray-800 text-white",
     });
   };
 
   return (
     <div className="flex flex-col gap-4">
-      <p>Here&#39;s an example of variable assignments in TypeScript:</p>
+      <p>Here are some examples of string concatenations in TypeScript:</p>
       <CodeBlock
         text={code}
         language="typescript"
@@ -86,9 +86,12 @@ let dynamicValue: any = "This can be anything";
         }}
       />
       <div className="flex flex-wrap gap-2 justify-center">
-        {Object.entries(variables).map(([name, value], index) => (
+        {concatenations.map(({ name, operation }, index) => (
           <div key={name} className="relative">
-            <Button size="sm" onClick={(e) => showVariable(name, value, e)}>
+            <Button
+              size="sm"
+              onClick={(e) => showConcatenation(name, operation, e)}
+            >
               Show {name}
             </Button>
             {index === 0 && showPing && (
@@ -115,13 +118,11 @@ let dynamicValue: any = "This can be anything";
             <div className="absolute left-1 top-0.6 -ml-2 w-3 h-4 bg-blue-100 dark:bg-blue-900 rotate-45 transform origin-center"></div>
             <h4 className="text-sm font-semibold mb-2">@vikkiklikk</h4>
             <p className="text-sm">
-              The difference here between normal JavaScript and TypeScript is
-              that we declare the type of our variables. In TypeScript, we
-              explicitly specify the data type of each variable, which provides
-              several benefits: By declaring types, TypeScript can catch
-              type-related errors at compile-time, before the code runs. Type
-              annotations serve as built-in documentation, making it easier for
-              developers to understand what kind of data a variable should hold.
+              TypeScript provides type checking for string concatenations,
+              ensuring that you&#39;re only concatenating compatible types. This
+              helps prevent runtime errors and makes your code more robust.
+              Template literals offer a more readable and flexible way to create
+              complex strings with embedded expressions.
             </p>
           </div>
         </div>
@@ -130,4 +131,4 @@ let dynamicValue: any = "This can be anything";
   );
 };
 
-export default Variables;
+export default StringConcatenations;

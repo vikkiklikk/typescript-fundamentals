@@ -4,13 +4,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Separator } from "@/components/ui/separator";
-import { CustomToast } from "@/components/ui/custom-toast";
 import { TerminalOutput } from "@/components/ui/terminal";
 
-const ArithmeticOperations = () => {
+const DateOperations = () => {
   const { toast } = useToast();
   const [showPing, setShowPing] = useState(true);
   const [showChatBubble, setShowChatBubble] = useState(false);
+  const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
     const pingTimer = setTimeout(() => {
@@ -19,7 +19,7 @@ const ArithmeticOperations = () => {
 
     const chatBubbleTimer = setTimeout(() => {
       setShowChatBubble(true);
-    }, 500); // Delay of 1 second before showing the chat bubble
+    }, 500); // Delay of 0.5 seconds before showing the chat bubble
 
     return () => {
       clearTimeout(pingTimer);
@@ -28,59 +28,68 @@ const ArithmeticOperations = () => {
   }, []);
 
   const code = `
-let a: number = 10;
-let b: number = 5;
+// Get the current date and time
+const now: Date = new Date();
 
-let addition: number = a + b;
-let subtraction: number = a - b;
-let multiplication: number = a * b;
-let division: number = a / b;
-let modulus: number = a % b;
+// Output the full date and time
+console.log(now.toString());
+
+// Get specific parts of the date
+console.log(now.getFullYear());    // Year
+console.log(now.getMonth() + 1);   // Month (0-11, so add 1)
+console.log(now.getDate());        // Day of the month
+console.log(now.getHours());       // Hour
+console.log(now.getMinutes());     // Minutes
+console.log(now.getSeconds());     // Seconds
+
+// Format the date
+const formattedDate: string = \`\${now.getFullYear()}-\${String(now.getMonth() + 1).padStart(2, '0')}-\${String(now.getDate()).padStart(2, '0')}\`;
+console.log(formattedDate);
+
+// Format the time
+const formattedTime: string = \`\${String(now.getHours()).padStart(2, '0')}:\${String(now.getMinutes()).padStart(2, '0')}:\${String(now.getSeconds()).padStart(2, '0')}\`;
+console.log(formattedTime);
   `.trim();
 
-  const operations = [
+  const dateOperations = [
+    { name: "Full Date", operation: () => currentDate.toString() },
+    { name: "Year", operation: () => currentDate.getFullYear() },
+    { name: "Month", operation: () => currentDate.getMonth() + 1 },
+    { name: "Day", operation: () => currentDate.getDate() },
+    { name: "Hours", operation: () => currentDate.getHours() },
+    { name: "Minutes", operation: () => currentDate.getMinutes() },
+    { name: "Seconds", operation: () => currentDate.getSeconds() },
     {
-      name: "Addition",
-      symbol: "+",
-      operation: (a: number, b: number) => a + b,
+      name: "Formatted Date",
+      operation: () =>
+        `${currentDate.getFullYear()}-${String(
+          currentDate.getMonth() + 1
+        ).padStart(2, "0")}-${String(currentDate.getDate()).padStart(2, "0")}`,
     },
     {
-      name: "Subtraction",
-      symbol: "-",
-      operation: (a: number, b: number) => a - b,
-    },
-    {
-      name: "Multiplication",
-      symbol: "*",
-      operation: (a: number, b: number) => a * b,
-    },
-    {
-      name: "Division",
-      symbol: "/",
-      operation: (a: number, b: number) => a / b,
-    },
-    {
-      name: "Modulus",
-      symbol: "%",
-      operation: (a: number, b: number) => a % b,
+      name: "Formatted Time",
+      operation: () =>
+        `${String(currentDate.getHours()).padStart(2, "0")}:${String(
+          currentDate.getMinutes()
+        ).padStart(2, "0")}:${String(currentDate.getSeconds()).padStart(
+          2,
+          "0"
+        )}`,
     },
   ];
 
-  const performOperation = (
+  const showResult = (
     name: string,
-    symbol: string,
-    operation: (a: number, b: number) => number,
+    operation: () => string | number,
     event: React.MouseEvent
   ) => {
     event.preventDefault();
     event.stopPropagation();
-    const a = 10;
-    const b = 5;
-    const result = operation(a, b);
+    const result = operation();
     toast({
       description: (
         <TerminalOutput
-          command={`console.log(${a} ${symbol} ${b})`}
+          command={`console.log(${name})`}
           output={result.toString()}
         />
       ),
@@ -91,7 +100,7 @@ let modulus: number = a % b;
 
   return (
     <div className="flex flex-col gap-4">
-      <p>Here are some examples of arithmetic operations in TypeScript:</p>
+      <p>Here&#39;s an example of using the Date object in TypeScript:</p>
       <CodeBlock
         text={code}
         language="typescript"
@@ -104,12 +113,9 @@ let modulus: number = a % b;
         }}
       />
       <div className="flex flex-wrap gap-2 justify-center">
-        {operations.map(({ name, symbol, operation }, index) => (
+        {dateOperations.map(({ name, operation }, index) => (
           <div key={name} className="relative">
-            <Button
-              size="sm"
-              onClick={(e) => performOperation(name, symbol, operation, e)}
-            >
+            <Button size="sm" onClick={(e) => showResult(name, operation, e)}>
               Show {name}
             </Button>
             {index === 0 && showPing && (
@@ -136,11 +142,14 @@ let modulus: number = a % b;
             <div className="absolute left-1 top-0.6 -ml-2 w-3 h-4 bg-blue-100 dark:bg-blue-900 rotate-45 transform origin-center"></div>
             <h4 className="text-sm font-semibold mb-2">@vikkiklikk</h4>
             <p className="text-sm">
-              TypeScript enhances arithmetic operations by providing type
-              checking. This means you can&#39;t accidentally perform operations
-              on incompatible types, like adding a number to a string. This type
-              safety helps catch errors early in the development process, making
-              your code more robust and predictable.
+              In TypeScript, the Date object works the same way as in
+              JavaScript, but with added type safety. It provides methods to
+              work with dates and times, allowing you to create, manipulate, and
+              format dates easily. Remember that months are zero-indexed (0-11),
+              so always add 1 when displaying the month. TypeScript&#39;s type
+              system helps prevent common mistakes when working with dates, such
+              as passing invalid types to Date methods or using non-existent
+              properties.
             </p>
           </div>
         </div>
@@ -149,4 +158,4 @@ let modulus: number = a % b;
   );
 };
 
-export default ArithmeticOperations;
+export default DateOperations;
