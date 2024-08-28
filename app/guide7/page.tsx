@@ -22,110 +22,106 @@ import {
 import Link from "next/link";
 import Variables from "./components/variables";
 import Arithmetic from "./components/arithmetic";
+import AccordionInstructionToast from "./components/accordionInstruction";
 
 const page = () => {
   return (
-    <div className="flex flex-col mt-4 items-center justify-center">
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]"></div>
-      <Card className="w-[850px]">
-        <CardHeader>
-          <CardTitle>Guide 7</CardTitle>
-          <CardDescription>
-            follow these steps to try out different things connected to
-            TypeScript:
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form>
-            <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="item-1">
-                <AccordionTrigger>
-                  Demonstrate variables assignments
-                </AccordionTrigger>
-                <AccordionContent>
-                  <Variables />
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger>
-                  Output the result of arithmetic operations
-                </AccordionTrigger>
-                <AccordionContent>
-                  <Arithmetic />
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3">
-                <AccordionTrigger>
-                  Output the result of string concatenations
-                </AccordionTrigger>
-                <AccordionContent>
-                  String concatenations output component goes here.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-4">
-                <AccordionTrigger>
-                  Demonstrate the usage of if statements to check for truthy or
-                  falsy values
-                </AccordionTrigger>
-                <AccordionContent>
-                  Usage of if statements to check for truthy or falsy values
-                  component goes here.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-5">
-                <AccordionTrigger>
-                  Create array with multiple values
-                </AccordionTrigger>
-                <AccordionContent>
-                  Array demonstration component goes here.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-6">
-                <AccordionTrigger>
-                  Demonstrate how to create an object
-                </AccordionTrigger>
-                <AccordionContent>
-                  Object demonstration component goes here.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-7">
-                <AccordionTrigger>
-                  Demonstrate at least one Math() method
-                </AccordionTrigger>
-                <AccordionContent>
-                  Demonstration of Math() method component goes here.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-8">
-                <AccordionTrigger>
-                  Output the date and time of opening of the file using Date()
-                </AccordionTrigger>
-                <AccordionContent>
-                  Demonstration of new Date() on opening the component goes
-                  here.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </form>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <Link href="/">
-            <Button variant="outline">Back</Button>
-          </Link>
-          <Link href="/guide8">
-            <Button>Next guide</Button>
-          </Link>
-        </CardFooter>
-      </Card>
-      <div className="w-[400px] rounded-lg">
-        {/*         <CodeBlock
-          text='console.log("Hello, world!");'
-          language="typescript"
-          showLineNumbers={true}
-          theme={dracula}
-        /> */}
+    <>
+      <AccordionInstructionToast />
+      <div className="flex flex-col mt-4 items-center justify-center">
+        <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]"></div>
+        <Card className="w-[850px]">
+          <CardHeader>
+            <CardTitle>Guide 7</CardTitle>
+            <CardDescription>
+              follow these steps to try out different things connected to
+              TypeScript:
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form>
+              <Accordion type="multiple" className="w-full">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger>
+                    Demonstrate variables assignments
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <Variables />
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-2">
+                  <AccordionTrigger>
+                    Output the result of arithmetic operations
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <Arithmetic />
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-3">
+                  <AccordionTrigger>
+                    Output the result of string concatenations
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    String concatenations output component goes here.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-4">
+                  <AccordionTrigger>
+                    Demonstrate the usage of if statements to check for truthy
+                    or falsy values
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    Usage of if statements to check for truthy or falsy values
+                    component goes here.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-5">
+                  <AccordionTrigger>
+                    Create array with multiple values
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    Array demonstration component goes here.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-6">
+                  <AccordionTrigger>
+                    Demonstrate how to create an object
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    Object demonstration component goes here.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-7">
+                  <AccordionTrigger>
+                    Demonstrate at least one Math() method
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    Demonstration of Math() method component goes here.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-8">
+                  <AccordionTrigger>
+                    Output the date and time of opening of the file using Date()
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    Demonstration of new Date() on opening the component goes
+                    here.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </form>
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <Link href="/">
+              <Button variant="outline">Back</Button>
+            </Link>
+            <Link href="/guide8">
+              <Button>Next guide</Button>
+            </Link>
+          </CardFooter>
+        </Card>
       </div>
-    </div>
+    </>
   );
 };
 
