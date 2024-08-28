@@ -59,7 +59,7 @@ let dynamicValue: any = "This can be anything";
         />
       ),
       duration: 5000,
-      className: "bg-gray-900 border-gray-800 text-white",
+      className: "dark:bg-gray-900 dark:border-gray-800 text-white",
     });
   };
 
