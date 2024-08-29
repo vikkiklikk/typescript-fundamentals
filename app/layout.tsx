@@ -30,7 +30,7 @@ export default function RootLayout({
             <div className="p-2 absolute right-0">
               <ModeToggle />
             </div>
-            {children}
+            <main>{children}</main>
           </div>
           <Toaster />
         </ThemeProvider>
