@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Separator } from "@/components/ui/separator";
 import { TerminalOutput } from "@/components/ui/terminal";
+import { Info } from "lucide-react";
 
 const MathMethods = () => {
   const { toast } = useToast();
@@ -118,6 +119,9 @@ console.log(Math.min(5, 10, 15));// Output: 5
         >
           <div className="relative bg-blue-100 dark:bg-blue-900 p-4 rounded-lg shadow">
             <div className="absolute left-1 top-0.6 -ml-2 w-3 h-4 bg-blue-100 dark:bg-blue-900 rotate-45 transform origin-center"></div>
+            <div className="absolute right-1 -top-3 -mr-4">
+              <Info />
+            </div>
             <h4 className="text-sm font-semibold mb-2">@vikkiklikk</h4>
             <p className="text-sm">
               TypeScript inherits all the Math methods from JavaScript,
