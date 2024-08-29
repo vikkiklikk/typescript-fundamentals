@@ -17,7 +17,7 @@ export const TerminalOutput: React.FC<TerminalOutputProps> = ({
         <span className="ml-1 w-2 h-4 dark:bg-white bg-black inline-block animate-blink"></span>
       </div>
       <pre className="mt-2 p-2 dark:bg-gray-800  bg-gray-100 rounded">
-        <code>{output}</code>
+        <div dangerouslySetInnerHTML={{ __html: output }} />
       </pre>
     </div>
   );

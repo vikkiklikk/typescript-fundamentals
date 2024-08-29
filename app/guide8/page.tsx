@@ -30,7 +30,7 @@ const page = () => {
         <Card className="w-[850px]">
           <CardHeader>
             <div className="mb-2">
-              <CardTitle>Guide 8</CardTitle>
+              <CardTitle>Guide 8 - Conditionals</CardTitle>
             </div>
             <CardDescription>
               Create a TypeScript file that describes the data using the

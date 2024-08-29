@@ -30,7 +30,7 @@ const page = () => {
         <Card className="w-[850px]">
           <CardHeader>
             <div className="mb-2">
-              <CardTitle>Guide 9</CardTitle>
+              <CardTitle>Guide 9 - Loops & Iterators</CardTitle>
             </div>
             <CardDescription>
               Get the randomized data and transform it into an array. <br></br>

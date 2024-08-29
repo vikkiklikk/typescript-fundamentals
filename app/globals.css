@@ -92,6 +92,18 @@
   animation: blink 1s step-end infinite;
 }
 
+/* Toast viewport too damn small!!!! */
+.toast-viewport {
+  --viewport-padding: 25px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.toast-root {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
 /* Ensure text visibility */
 h1,
 h2,
