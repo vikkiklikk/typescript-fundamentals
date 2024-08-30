@@ -12,3 +12,5 @@ each assignment without leaving the page or filling the site with content.
 Instead of console logging results I used a custom toast from shadcn to emulate a terminal.
 
 Everything is styled with tailwindCSS.
+
+Added framer motion for page transitions.
