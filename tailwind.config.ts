@@ -70,8 +70,8 @@ const config = {
         },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        "accordion-down": "accordion-down 0.4s ease-out",
+        "accordion-up": "accordion-up 0.4s ease-out",
       },
     },
   },
@@ -85,6 +85,14 @@ const config = {
           },
           "-ms-overflow-style": "none",
           "scrollbar-width": "none",
+        },
+        /* Added to be able to toggle it on for the code blocks */
+        ".show-scrollbar": {
+          "::-webkit-scrollbar": {
+            display: "block",
+          },
+          "-ms-overflow-style": "auto",
+          "scrollbar-width": "auto",
         },
       };
       addUtilities(newUtilities);

@@ -116,3 +116,8 @@ span,
 div {
   @apply text-foreground;
 }
+
+body,
+html {
+  scrollbar-gutter: stable; /* Prevent layout shift when scrollbar appears */
+}
