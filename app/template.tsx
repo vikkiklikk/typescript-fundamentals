@@ -12,6 +12,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ ease: "easeInOut", duration: 0.25 }}
+      className="overflow-hidden hide-scrollbar"
     >
       {children}
     </motion.div>
