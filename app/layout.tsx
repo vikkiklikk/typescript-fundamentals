@@ -26,10 +26,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <div className="min-h-screen text-foreground relative">
-            <div className="p-2 absolute right-0">
-              <ModeToggle />
-            </div>
+          <div className="min-h-screen text-foreground">
             <main>{children}</main>
           </div>
           <Toaster />
