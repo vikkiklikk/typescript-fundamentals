@@ -4,9 +4,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Separator } from "@/components/ui/separator";
-import { CustomToast } from "@/components/ui/custom-toast";
 import { TerminalOutput } from "@/components/ui/terminal";
 import { Info } from "lucide-react";
+import { useStaggeredFadeIn } from "@/app/hooks/useStaggeredFadeIn";
 
 const ArithmeticOperations = () => {
   const { toast } = useToast();

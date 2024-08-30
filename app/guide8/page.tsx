@@ -38,23 +38,25 @@ const page = () => {
             <div className="mb-2">
               <CardTitle>Guide 8 - Conditionals</CardTitle>
             </div>
-            <CardDescription>
-              Create a TypeScript file that describes the data using the
-              appropriate data types In the same file, making sure each person
-              is represented by an object in an array: Answer the following
-              questions using if statements and output: <br></br>
-              <br></br>Is the first person older than the last person?<br></br>{" "}
-              Does the 2nd person have the same amount of kids as the 3rd?{" "}
-              <br></br>
-              <br></br>Create a statement that checks if the 1st person and the
-              4th person in the array both know how to program. If yes, output
-              “Yay!”, if not output “LMGTFY”. <br></br>
-              <br></br>Create a statement that checks the 2nd person in the
-              array for their nationality. If the person’s country is Iceland,
-              output “Hæ”, if he/she is from Spain output “Hola”, if he/she is
-              from Korea output “여보세요”). If the country is none of the
-              above, output “Hello”.
-            </CardDescription>
+            <div>
+              <CardDescription>
+                Create a TypeScript file that describes the data using the
+                appropriate data types In the same file, making sure each person
+                is represented by an object in an array: Answer the following
+                questions using if statements and output: <br></br>
+                <br></br>Is the first person older than the last person?
+                <br></br> Does the 2nd person have the same amount of kids as
+                the 3rd? <br></br>
+                <br></br>Create a statement that checks if the 1st person and
+                the 4th person in the array both know how to program. If yes,
+                output “Yay!”, if not output “LMGTFY”. <br></br>
+                <br></br>Create a statement that checks the 2nd person in the
+                array for their nationality. If the person’s country is Iceland,
+                output “Hæ”, if he/she is from Spain output “Hola”, if he/she is
+                from Korea output “여보세요”). If the country is none of the
+                above, output “Hello”.
+              </CardDescription>
+            </div>
           </CardHeader>
           <CardContent>
             <form>

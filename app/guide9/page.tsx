@@ -38,13 +38,16 @@ const page = () => {
             <div className="mb-2">
               <CardTitle>Guide 9 - Loops & Iterators</CardTitle>
             </div>
-            <CardDescription>
-              Get the randomized data and transform it into an array. <br></br>
-              <br></br>Output how many children all people have, in total (Ex.:
-              Bia has 2 kids, Paul has 3, so the total 5)<br></br>
-              <br></br>
-              Output all properties of all people
-            </CardDescription>
+            <div>
+              <CardDescription>
+                Get the randomized data and transform it into an array.{" "}
+                <br></br>
+                <br></br>Output how many children all people have, in total
+                (Ex.: Bia has 2 kids, Paul has 3, so the total 5)<br></br>
+                <br></br>
+                Output all properties of all people
+              </CardDescription>
+            </div>
           </CardHeader>
           <CardContent>
             <form>

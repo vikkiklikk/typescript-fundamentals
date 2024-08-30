@@ -38,10 +38,12 @@ const page = () => {
             <div className="mb-2">
               <CardTitle>Guide 10 - Functions</CardTitle>
             </div>
-            <CardDescription>
-              Understand what functions are, parameters, return values and
-              related concepts.
-            </CardDescription>
+            <div>
+              <CardDescription>
+                Understand what functions are, parameters, return values and
+                related concepts.
+              </CardDescription>
+            </div>
           </CardHeader>
           <CardContent>
             <form>
@@ -58,12 +60,16 @@ const page = () => {
             </form>
           </CardContent>
           <CardFooter className="flex justify-between">
-            <Link href="/guide9">
-              <Button variant="outline">Back</Button>
-            </Link>
-            <Link href="/">
-              <Button>Home</Button>
-            </Link>
+            <div>
+              <Link href="/guide9">
+                <Button variant="outline">Back</Button>
+              </Link>
+            </div>
+            <div>
+              <Link href="/">
+                <Button>Home</Button>
+              </Link>
+            </div>
           </CardFooter>
         </Card>
       </div>

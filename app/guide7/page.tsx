@@ -45,10 +45,12 @@ const page = () => {
             <div className="mb-2">
               <CardTitle>Guide 7 - Fundamentals & Data types</CardTitle>
             </div>
-            <CardDescription>
-              Follow these steps to try out different things connected to
-              TypeScript:
-            </CardDescription>
+            <div>
+              <CardDescription>
+                Follow these steps to try out different things connected to
+                TypeScript:
+              </CardDescription>
+            </div>
           </CardHeader>
           <CardContent>
             <form>
